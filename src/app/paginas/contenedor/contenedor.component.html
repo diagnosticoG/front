@@ -1,0 +1,30 @@
+<mat-drawer-container  autosize class="h-full">
+    <mat-drawer #drawer  mode="side" >
+      <app-barra-lateral>
+
+      </app-barra-lateral>
+    </mat-drawer>
+  
+
+    <div class="h-full">
+      <app-barra-superior >
+        
+        <button class= "font-bold text-lg text-slate-100" button mat-button (click)="drawer.toggle()" displayMenu>
+          <a class="text-slate-100 ">
+          <mat-icon  class="pt-1" aria-hidden="false" aria-label="" fontIcon="menu_open" ></mat-icon>
+          <a class="px-2 pb-16">InvControl</a>
+        </a>
+        </button>
+
+      </app-barra-superior>
+      <div>
+        <router-outlet>
+
+        </router-outlet>
+      </div>
+
+
+    </div>
+  
+  </mat-drawer-container>
+
