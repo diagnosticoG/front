@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { PaginasRoutingModule } from './paginas-routing.module';
 import { GeneroComponent } from './genero/genero.component';
-import { FormComponent } from './genero/form/form.component';
+import { FormComponent as GeneroFormComponent } from './genero/form/form.component';
+import { FormComponent as PersonaFormComponent } from './persona/form/form.component';
+
 import { CompartidoModule } from '../compartido/compartido.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -18,7 +20,8 @@ import {MatInputModule} from '@angular/material/input';
 @NgModule({
   declarations: [
     GeneroComponent,
-    FormComponent,
+    GeneroFormComponent,
+    PersonaFormComponent,
     ContenedorComponent,
     PersonaComponent,
   ],
