@@ -12,6 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule} from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ModalEliminarComponent } from './modal-eliminar/modal-eliminar.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ContenedorComponent,
     BarraLateralComponent,
     BarraSuperiorComponent,
+    ModalEliminarComponent,
   ],
   imports: [
     CommonModule,
@@ -29,7 +32,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatIconModule,
     MatListModule,
     RouterModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatDialogModule
   ],
   exports:[
     TablaComponent,
