@@ -10,10 +10,16 @@ import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [
     TablaComponent,
-    ContenedorComponent
+    ContenedorComponent,
   ],
   imports: [
     CommonModule,
+    MatTableModule,
+    MatCardModule
+  ],
+  exports:[
+    TablaComponent,
+    ContenedorComponent,
     MatTableModule,
     MatCardModule
   ]
