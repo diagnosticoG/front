@@ -26,9 +26,13 @@ export class FormComponent {
 
   cargarFormulario() {
     this.formulario = new FormGroup({
-      gen_id: new FormControl(this.datos?.gen_id),
-      gen_nombre: new FormControl(this.datos ? this.datos.gen_nombre : '', Validators.required),
-      gen_descripcion: new FormControl(this.datos ? this.datos.gen_descripcion : ''),
+      per_id: new FormControl(this.datos?.per_id),
+      per_cedula: new FormControl(this.datos ? this.datos.per_cedula : '', Validators.required),
+      per_nombre: new FormControl(this.datos ? this.datos.per_nombre : '', Validators.required),
+      per_apellido: new FormControl(this.datos ? this.datos.per_apellido : '', Validators.required),
+      per_fecha_nacimiento: new FormControl(this.datos ? this.datos.per_fecha_nacimiento : '', Validators.required),
+      per_gen_id: new FormControl(this.datos ? this.datos.per_gen_id : '', Validators.required),
+      per_estado_civil: new FormControl(this.datos ? this.datos.per_estado_civil : '', Validators.required),
     });
   }
   grabar(){

@@ -17,31 +17,35 @@ export class PersonaComponent {
       per_apellido: 'Pérez',
       per_fecha_nacimiento: '1990-05-15',
       per_genero: 'Masculino',
-      per_estado_civil: 'Soltero'
+      per_gen_id: '1',
+      per_estado_civil: 'Soltero(a)'
     },
     {
       per_cedula: '9876543210',
       per_nombre: 'María',
       per_apellido: 'Gómez',
       per_fecha_nacimiento: '1985-08-20',
+      per_gen_id: '2',
       per_genero: 'Femenino',
-      per_estado_civil: 'Casada'
+      per_estado_civil: 'Casado(a)'
     },
     {
       per_cedula: '4567890123',
       per_nombre: 'Alex',
       per_apellido: 'García',
       per_fecha_nacimiento: '1995-03-10',
+      per_gen_id: '2',
       per_genero: 'No binario',
-      per_estado_civil: 'Divorciado'
+      per_estado_civil: 'Divorciado(a)'
     },
     {
       per_cedula: '7890123456',
       per_nombre: 'Patricia',
       per_apellido: 'López',
       per_fecha_nacimiento: '1982-11-25',
+      per_gen_id: '3',
       per_genero: 'Otro',
-      per_estado_civil: 'Viuda'
+      per_estado_civil: 'Viudo(a)'
     }
   ];
 

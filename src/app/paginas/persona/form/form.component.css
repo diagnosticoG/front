@@ -1,6 +1,7 @@
 
 mat-form-field {
-    width: 100%;
+    width: calc(50vw - 15rem);
+    margin: 10px 10px;
 }
 
 mat-label {
@@ -8,11 +9,6 @@ mat-label {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.grid {
-    display: grid;
-    gap: 16px;
 }
 
 .custom-button {

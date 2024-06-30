@@ -13,14 +13,43 @@
 
     <form [formGroup]="formulario" (ngSubmit)="grabar()">
         <div class="grid grid-cols-2 gap-4">
-            <mat-form-field>
-                <mat-label>Nombre género</mat-label>
-                <input type="text" formControlName="gen_nombre" matInput>
+            <mat-form-field class="w-full">
+                <mat-label>Cédula</mat-label>
+                <input type="text" formControlName="per_cedula" matInput>
             </mat-form-field>
-
-            <mat-form-field>
-                <mat-label>Descripción género (opcional)</mat-label>
-                <input type="text" formControlName="gen_descripcion" matInput>
+        
+            <mat-form-field class="w-full">
+                <mat-label>Nombre</mat-label>
+                <input type="text" formControlName="per_nombre" matInput>
+            </mat-form-field>
+        
+            <mat-form-field class="w-full">
+                <mat-label>Apellido</mat-label>
+                <input type="text" formControlName="per_apellido" matInput>
+            </mat-form-field>
+        
+            <mat-form-field class="w-full">
+                <mat-label>Fecha de Nacimiento</mat-label>
+                <input type="text" formControlName="per_fecha_nacimiento" matInput>
+            </mat-form-field>
+        
+            <mat-form-field class="w-full">
+                <mat-label>Género</mat-label>
+                <mat-select formControlName="per_gen_id">
+                    <mat-option value="1">Masculino</mat-option>
+                    <mat-option value="2">Femenino</mat-option>
+                    <mat-option value="3">Otro</mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+            <mat-form-field class="w-full">
+                <mat-label>Estado Civil</mat-label>
+                <mat-select formControlName="per_estado_civil">
+                    <mat-option value="Soltero(a)">Soltero(a)</mat-option>
+                    <mat-option value="Casado(a)">Casado(a)</mat-option>
+                    <mat-option value="Divorciado(a)">Divorciado(a)</mat-option>
+                    <mat-option value="Viudo(a)">Viudo(a)</mat-option>
+                </mat-select>
             </mat-form-field>
         </div>
         
