@@ -11,6 +11,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule} from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RouterModule} from '@angular/router';
     MatIconModule,
     MatListModule,
     RouterModule,
+    FlexLayoutModule
   ],
   exports:[
     TablaComponent,
@@ -35,7 +37,9 @@ import { RouterModule} from '@angular/router';
     BarraLateralComponent,
     BarraSuperiorComponent,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule,
+    FlexLayoutModule
   ]
 })
 export class CompartidoModule { }

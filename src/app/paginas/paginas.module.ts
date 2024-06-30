@@ -6,10 +6,14 @@ import { GeneroComponent } from './genero/genero.component';
 import { FormComponent } from './genero/form/form.component';
 import { CompartidoModule } from '../compartido/compartido.module';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ContenedorComponent } from './contenedor/contenedor.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { PersonaComponent } from './persona/persona.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     CompartidoModule,
     MatIconModule,
     MatSidenavModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     GeneroComponent

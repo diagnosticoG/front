@@ -27,16 +27,18 @@ export class GeneroComponent {
   }
 
   abrirFormulario(fila:any=null  ){
+    console.log(fila)
     const opciones={
       panelClass: 'panel-container',
       disableClose:true,
-      datos:fila
+      data: fila
     }
     const referencia:MatDialogRef<FormComponent>=this.ventanaDialogo.open(FormComponent,opciones)
     referencia.afterClosed().subscribe((form)=>{
-      if(true){
+      if(form.gen_id){
         
       }else{
+        
       }
     }
   

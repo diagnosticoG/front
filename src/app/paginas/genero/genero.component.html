@@ -1,7 +1,7 @@
 <div>
     <h2>Género</h2>
     <div class="container">
-        <button (click)='abrirFormulario()'>Agregar</button>
+        <button (click)='abrirFormulario()' matTooltip="AGREGAR"><mat-icon>add</mat-icon></button>
         <br>
         <app-contenedor>
             <app-tabla [datos]="datos" [metaDataColumnas]="metaDataColumnas">
@@ -13,12 +13,14 @@
                             color="primary"
                             (click)="abrirFormulario(row)"
                             matTooltip="EDITAR">
+                            <mat-icon>edit</mat-icon>
                         </button>
                         <button 
                             mat-icon-button
                             color="accent"
                             matTooltip="ELIMINAR"
                             >
+                            <mat-icon>delete</mat-icon>
                         </button>
                     </td>
                 </ng-container>
