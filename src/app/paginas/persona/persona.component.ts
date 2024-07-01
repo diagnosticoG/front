@@ -5,6 +5,8 @@ import { FormComponent } from './form/form.component';
 import { ModalEliminarComponent } from 'src/app/compartido/modal-eliminar/modal-eliminar.component';
 import { PersonaService } from 'src/app/servicios/persona.service';
 import { Persona } from 'src/app/compartido/modelos/persona.model';
+import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-persona',
@@ -25,7 +27,7 @@ export class PersonaComponent {
     { campo: 'estado_Civil', titulo: 'ESTADO CIVIL' },
   ];
 
-  constructor(private ventanaDialogo: MatDialog, private personaServicio: PersonaService) {
+  constructor(private ventanaDialogo: MatDialog, private personaServicio: PersonaService,private toastr: ToastrService,private castFecha: DatePipe) {
     this.cargarPersonas();
     this.changePage(0);
   }
@@ -43,19 +45,21 @@ export class PersonaComponent {
       if (form.Id) {
         this.personaServicio.actualizarPersona(form.Id, persona).subscribe(
           (data) => {
+            this.mensajeExitoso()
             this.cargarPersonas();
           },
           (error) => {
-            console.log(error);
+            this.mensajeError();
           }
         );
       } else {
         this.personaServicio.crearPersona(persona).subscribe(
           (data) => {
+            this.mensajeExitoso();
             this.cargarPersonas();
           },
           (error) => {
-            console.log(error);
+            this.mensajeError();
           }
         );
       }
@@ -73,10 +77,11 @@ export class PersonaComponent {
       if (estado) {
         this.personaServicio.eliminarPersona(fila.id).subscribe(
           (datos) => {
+            this.mensajeExitoso()
             this.cargarPersonas();
           },
           (error) => {
-            console.log(error);
+            this.mensajeError()
           }
         );
       }
@@ -86,12 +91,15 @@ export class PersonaComponent {
   cargarPersonas() {
     this.personaServicio.cargarPersonas().subscribe(
       (datos) => {
-        this.datosTotales = datos;
-        this.totalRecords = this.datosTotales.length; // Actualizar totalRecords después de cargar los datos
-        this.changePage(0); // Llamar a changePage para actualizar la página actual
+        this.datosTotales = datos.map((persona:any) => ({
+          ...persona,
+          fecha_Nacimiento: this.castFecha.transform(persona.fecha_Nacimiento,'yyyy-MM-dd')
+        }));
+        this.totalRecords = this.datosTotales.length;
+        this.changePage(0);
       },
       (error) => {
-        console.log(error);
+        this.mensajeError();
       }
     );
   }
@@ -100,5 +108,13 @@ export class PersonaComponent {
     const pageSize = 5;
     const skip = pageSize * page;
     this.datos = this.datosTotales.slice(skip, skip + pageSize);
+  }
+
+  mensajeExitoso() {
+    this.toastr.success('Operación realizada exitosamente', 'Sistema GAIA');
+  }
+
+  mensajeError() {
+    this.toastr.error('Oops. Parece que hubo un problema con el servidor', 'Sistema GAIA');
   }
 }
