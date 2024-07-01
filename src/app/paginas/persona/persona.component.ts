@@ -3,6 +3,9 @@ import { MetaDataColumna } from 'src/app/compartido/interfaces/metaDataColumna.i
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormComponent } from './form/form.component';
 import { ModalEliminarComponent } from 'src/app/compartido/modal-eliminar/modal-eliminar.component';
+import { PersonaService } from 'src/app/servicios/persona.service';
+import { Persona } from 'src/app/compartido/modelos/persona.model';
+
 
 @Component({
   selector: 'app-persona',
@@ -10,58 +13,22 @@ import { ModalEliminarComponent } from 'src/app/compartido/modal-eliminar/modal-
   styleUrls: ['./persona.component.css']
 })
 export class PersonaComponent {
-  datos: any[] = [
-    {
-      per_cedula: '1234567890',
-      per_nombre: 'Juan',
-      per_apellido: 'Pérez',
-      per_fecha_nacimiento: '1990-05-15',
-      per_genero: 'Masculino',
-      per_gen_id: '1',
-      per_estado_civil: 'Soltero(a)'
-    },
-    {
-      per_cedula: '9876543210',
-      per_nombre: 'María',
-      per_apellido: 'Gómez',
-      per_fecha_nacimiento: '1985-08-20',
-      per_gen_id: '2',
-      per_genero: 'Femenino',
-      per_estado_civil: 'Casado(a)'
-    },
-    {
-      per_cedula: '4567890123',
-      per_nombre: 'Alex',
-      per_apellido: 'García',
-      per_fecha_nacimiento: '1995-03-10',
-      per_gen_id: '2',
-      per_genero: 'No binario',
-      per_estado_civil: 'Divorciado(a)'
-    },
-    {
-      per_cedula: '7890123456',
-      per_nombre: 'Patricia',
-      per_apellido: 'López',
-      per_fecha_nacimiento: '1982-11-25',
-      per_gen_id: '3',
-      per_genero: 'Otro',
-      per_estado_civil: 'Viudo(a)'
-    }
-  ];
+  datos: any[] = [];
 
   metaDataColumnas: MetaDataColumna[] = [
-    { campo: 'per_cedula', titulo: 'GENERO' },
-    { campo: 'per_nombre', titulo: 'NOMBRE' },
-    { campo: 'per_apellido', titulo: 'APELLIDO' },
-    { campo: 'per_fecha_nacimiento', titulo: 'FECHA NACIMIENTO' },
-    { campo: 'per_genero', titulo: 'GENERO' },
-    { campo: 'per_estado_civil', titulo: 'ESTADO CIVIL' },
+    { campo: 'cedula', titulo: 'CEDULA' },
+    { campo: 'nombre', titulo: 'NOMBRE' },
+    { campo: 'apellido', titulo: 'APELLIDO' },
+    { campo: 'fecha_Nacimiento', titulo: 'FECHA NACIMIENTO' },
+    { campo: 'genero_Id', titulo: 'GENERO' },
+    { campo: 'estado_Civil', titulo: 'ESTADO CIVIL' },
   ];
 
-  constructor(private ventanaDialogo: MatDialog) {}
+  constructor(private ventanaDialogo: MatDialog,private personaServicio:PersonaService) {
+    this.cargarPersonas()
+  }
 
   abrirFormulario(fila: any = null) {
-    console.log(fila);
     const opciones = {
       panelClass: 'panel-container',
       disableClose: true,
@@ -72,8 +39,26 @@ export class PersonaComponent {
       opciones
     );
     referencia.afterClosed().subscribe((form) => {
-      if (form.gen_id) {
+      const persona: Persona = form as Persona;
+      persona.Id = form.Id? form.Id : 0
+      if (form.Id) {
+        this.personaServicio.actualizarPersona(form.Id,persona).subscribe(
+          (data)=>{
+            this.cargarPersonas()
+          },
+          (error)=>{
+            console.log(error)
+          }
+        )
       } else {
+        this.personaServicio.crearPersona(persona).subscribe(
+          (data)=>{
+            this.cargarPersonas()
+          },
+          (error)=>{
+            console.log(error)
+          }
+        )
       }
     });
   }
@@ -89,8 +74,27 @@ export class PersonaComponent {
       this.ventanaDialogo.open(ModalEliminarComponent, opciones);
     referencia.afterClosed().subscribe((estado) => {
       if (estado == true) {
-        console.log('hola');
+        this.personaServicio.eliminarPersona(fila.id).subscribe(
+          (datos)=>{
+            this.cargarPersonas()
+          },
+          (error)=>{
+            console.log(error)
+          }
+        )
       }
     });
   }
+
+  cargarPersonas(){
+    this.personaServicio.cargarPersonas().subscribe(
+      (datos) => {
+        this.datos = datos;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
 }

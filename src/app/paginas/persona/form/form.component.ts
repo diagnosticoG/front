@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { GeneroService } from 'src/app/servicios/genero.service';
 
 @Component({
   selector: 'app-form',
@@ -10,29 +11,30 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class FormComponent {
   titulo : string = ''
   formulario!: FormGroup;
+  datosGenero:any[]=[]
   
   constructor(
     private dialogRef: MatDialogRef<FormComponent>,
-    @Inject(MAT_DIALOG_DATA) public datos: any,
+    @Inject(MAT_DIALOG_DATA) public datos: any, private generoServicio:GeneroService
  
   ) {
     this.titulo = datos ? 'EDITAR' : 'AGREGAR';
   }
 
   ngOnInit(): void {
-    console.log(this.datos)
+    this.cargarGeneros();
     this.cargarFormulario();
   }
 
   cargarFormulario() {
     this.formulario = new FormGroup({
-      per_id: new FormControl(this.datos?.per_id),
-      per_cedula: new FormControl(this.datos ? this.datos.per_cedula : '', Validators.required),
-      per_nombre: new FormControl(this.datos ? this.datos.per_nombre : '', Validators.required),
-      per_apellido: new FormControl(this.datos ? this.datos.per_apellido : '', Validators.required),
-      per_fecha_nacimiento: new FormControl(this.datos ? this.datos.per_fecha_nacimiento : '', Validators.required),
-      per_gen_id: new FormControl(this.datos ? this.datos.per_gen_id : '', Validators.required),
-      per_estado_civil: new FormControl(this.datos ? this.datos.per_estado_civil : '', Validators.required),
+      Id: new FormControl(this.datos?.id),
+      Cedula: new FormControl(this.datos ? this.datos.cedula : '', Validators.required),
+      Nombre: new FormControl(this.datos ? this.datos.nombre : '', Validators.required),
+      Apellido: new FormControl(this.datos ? this.datos.apellido : '', Validators.required),
+      Fecha_Nacimiento: new FormControl(this.datos ? this.datos.fecha_Nacimiento : '', Validators.required),
+      Genero_Id: new FormControl(this.datos ? this.datos.genero_Id : '', Validators.required),
+      Estado_Civil: new FormControl(this.datos ? this.datos.estado_Civil : '', Validators.required),
     });
   }
   grabar(){
@@ -41,5 +43,17 @@ export class FormComponent {
   }
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+  cargarGeneros(){
+    this.generoServicio.cargarGeneros().subscribe(
+      (datos)=>{
+        this.datosGenero = datos
+        console.log(this.datosGenero)
+      },
+      (error)=>{
+        console.log(error)
+      }
+    )
   }
 }
