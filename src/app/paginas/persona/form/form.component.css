@@ -1,0 +1,20 @@
+
+mat-form-field {
+    width: calc(50vw - 13rem);
+    margin: 10px 10px;
+}
+
+mat-label {
+    font-size: 0.875rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.custom-button {
+    width: 8cm;
+}
+
+
+  
+  

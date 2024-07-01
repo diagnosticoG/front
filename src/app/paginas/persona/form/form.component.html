@@ -1,0 +1,68 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="mt-2 flex items-center">
+        <h3>{{ titulo }}</h3>
+    </div>
+    <div class="mt-2 flex justify-end items-center">
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+
+<mat-dialog-content class="rounded-lg p-4">
+
+    <form [formGroup]="formulario" (ngSubmit)="grabar()">
+        <div class="grid grid-cols-2 gap-4">
+            <mat-form-field class="w-full">
+                <mat-label>Cédula</mat-label>
+                <input type="text" formControlName="Cedula" matInput>
+            </mat-form-field>
+        
+            <mat-form-field class="w-full">
+                <mat-label>Nombre</mat-label>
+                <input type="text" formControlName="Nombre" matInput>
+            </mat-form-field>
+        
+            <mat-form-field class="w-full">
+                <mat-label>Apellido</mat-label>
+                <input type="text" formControlName="Apellido" matInput>
+            </mat-form-field>
+        
+            <mat-form-field class="w-full">
+                <mat-label>Fecha de Nacimiento</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="Fecha_Nacimiento">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+              
+        
+            <mat-form-field class="w-full">
+                <mat-label>Género</mat-label>
+                <mat-select formControlName="Genero_Id">
+                    <mat-option *ngFor="let genero of datosGenero" [value]="genero.id">{{ genero.nombre }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+            <mat-form-field class="w-full">
+                <mat-label>Estado Civil</mat-label>
+                <mat-select formControlName="Estado_Civil">
+                    <mat-option value="Soltero(a)">Soltero(a)</mat-option>
+                    <mat-option value="Casado(a)">Casado(a)</mat-option>
+                    <mat-option value="Divorciado(a)">Divorciado(a)</mat-option>
+                    <mat-option value="Viudo(a)">Viudo(a)</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <button mat-raised-button type="submit" class="custom-button boton-pulsar"
+                [disabled]="formulario.invalid"
+                [ngClass]="{'invalido-button': formulario.invalid}">
+                Guardar
+            </button>
+            <button mat-button mat-dialog-close class="custom-button Cancelar">
+                Cancelar
+            </button>
+        </div>
+    </form>
+</mat-dialog-content>
