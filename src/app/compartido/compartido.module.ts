@@ -14,6 +14,8 @@ import { RouterModule} from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ModalEliminarComponent } from './modal-eliminar/modal-eliminar.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PaginatorComponent } from './paginator/paginator.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     BarraLateralComponent,
     BarraSuperiorComponent,
     ModalEliminarComponent,
+    PaginatorComponent,
   ],
   imports: [
     CommonModule,
@@ -33,7 +36,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatListModule,
     RouterModule,
     FlexLayoutModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule
   ],
   exports:[
     TablaComponent,
@@ -44,6 +48,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCardModule,
     MatToolbarModule,
     FlexLayoutModule,
+    PaginatorComponent
   ]
 })
 export class CompartidoModule { }

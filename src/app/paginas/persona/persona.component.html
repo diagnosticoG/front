@@ -26,6 +26,8 @@
                     </td>
                 </ng-container>
             </app-tabla> 
+            <app-paginator (onChangePage)="changePage($event)" [length]="totalRecords">
+            </app-paginator>
         </app-contenedor>
     </div>
 </div>
