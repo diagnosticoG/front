@@ -1,0 +1,10 @@
+div{
+    background-color: blue;
+}
+img{
+    height: 50px;
+    width: 100px;
+}
+.flex-right{
+    margin-right: 10px;
+}

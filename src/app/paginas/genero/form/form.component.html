@@ -1,0 +1,38 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="mt-2 flex items-center">
+        <h3>{{ titulo }}</h3>
+    </div>
+    <div class="mt-2 flex justify-end items-center">
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+
+<mat-dialog-content class="rounded-lg p-4">
+
+    <form [formGroup]="formulario" (ngSubmit)="grabar()">
+        <div class="grid grid-cols-2 gap-4">
+            <mat-form-field>
+                <mat-label>Nombre género</mat-label>
+                <input type="text" formControlName="nombre" matInput>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Descripción género (opcional)</mat-label>
+                <input type="text" formControlName="descripcion" matInput>
+            </mat-form-field>
+        </div>
+        
+        <div class="flex justify-end mt-6">
+            <button mat-raised-button type="submit" class="custom-button boton-pulsar"
+                [disabled]="formulario.invalid"
+                [ngClass]="{'invalido-button': formulario.invalid}">
+                Guardar
+            </button>
+            <button mat-button mat-dialog-close class="custom-button Cancelar">
+                Cancelar
+            </button>
+        </div>
+    </form>
+</mat-dialog-content>

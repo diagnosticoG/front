@@ -1,0 +1,29 @@
+<mat-drawer-container  autosize class="h-full">
+    <mat-drawer #drawer  mode="side" >
+      <app-barra-lateral>
+
+      </app-barra-lateral>
+    </mat-drawer>
+  
+
+    <div class="h-full">
+      <app-barra-superior >
+        
+        <button class= "font-bold text-lg text-slate-100 boton-pulsar" button mat-button (click)="drawer.toggle()" displayMenu>
+          <a class="text-slate-100 ">
+          <mat-icon  class="pt-1" aria-hidden="false" aria-label="" fontIcon="menu_open" ></mat-icon>
+        </a>
+        </button>
+
+      </app-barra-superior>
+      <div class="ventana">
+        <router-outlet>
+
+        </router-outlet>
+      </div>
+
+
+    </div>
+  
+  </mat-drawer-container>
+
