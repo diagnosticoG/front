@@ -5,6 +5,7 @@ import { FormComponent } from './form/form.component';
 import { ModalEliminarComponent } from 'src/app/compartido/modal-eliminar/modal-eliminar.component';
 import { GeneroService } from 'src/app/servicios/genero.service';
 import { Genero } from 'src/app/compartido/modelos/genero.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-genero',
@@ -21,7 +22,7 @@ export class GeneroComponent implements OnInit {
     { campo: 'descripcion', titulo: 'DESCRIPCION' },
   ];
 
-  constructor(private ventanaDialogo: MatDialog, private generoServicios: GeneroService) {}
+  constructor(private ventanaDialogo: MatDialog, private generoServicios: GeneroService,private toastr: ToastrService) {}
 
   ngOnInit() {
     this.cargarGeneros();
@@ -44,19 +45,21 @@ export class GeneroComponent implements OnInit {
       if (form.id) {
         this.generoServicios.actualizarGenero(form.id, form).subscribe(
           (datos) => {
+            this.mensajeExitoso()
             this.cargarGeneros();
           },
           (error) => {
-            console.log(error);
+            this.mensajeError()
           }
         );
       } else {
         this.generoServicios.crearGenero(genero).subscribe(
           (datos) => {
+            this.mensajeExitoso()
             this.cargarGeneros();
           },
           (error) => {
-            console.log(error);
+            this.mensajeError()
           }
         );
       }
@@ -74,10 +77,11 @@ export class GeneroComponent implements OnInit {
       if (estado == true) {
         this.generoServicios.eliminarGenero(fila.id).subscribe(
           (datos) => {
+            this.mensajeExitoso()
             this.cargarGeneros();
           },
           (error) => {
-            console.log(error);
+            this.mensajeError()
           }
         );
       }
@@ -92,7 +96,7 @@ export class GeneroComponent implements OnInit {
         this.changePage(0);
       },
       (error) => {
-        console.log(error);
+        this.mensajeError()
       }
     );
   }
@@ -101,5 +105,13 @@ export class GeneroComponent implements OnInit {
     const pageSize = 5;
     const skip = pageSize * page;
     this.datos = this.datosTotales.slice(skip, skip + pageSize);
+  }
+
+  mensajeExitoso() {
+    this.toastr.success('Operación realizada exitosamente', 'Sistema GAIA');
+  }
+
+  mensajeError() {
+    this.toastr.error('Oops. Parece que hubo un problema con el servidor', 'Sistema GAIA');
   }
 }
