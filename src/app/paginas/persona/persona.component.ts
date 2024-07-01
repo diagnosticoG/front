@@ -20,7 +20,7 @@ export class PersonaComponent {
     { campo: 'nombre', titulo: 'NOMBRE' },
     { campo: 'apellido', titulo: 'APELLIDO' },
     { campo: 'fecha_Nacimiento', titulo: 'FECHA NACIMIENTO' },
-    { campo: 'genero_Id', titulo: 'GENERO' },
+    { campo: 'genero_Nombre', titulo: 'GENERO' },
     { campo: 'estado_Civil', titulo: 'ESTADO CIVIL' },
   ];
 
