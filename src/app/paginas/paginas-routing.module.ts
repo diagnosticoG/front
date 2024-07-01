@@ -10,6 +10,7 @@ const routes: Routes = [
     component: ContenedorComponent,
     children: [
       { path: 'genero', component: GeneroComponent },
+      { path: '', component: PersonaComponent },
       { path: 'persona', component: PersonaComponent },
     ]
   }

@@ -54,13 +54,13 @@
             </mat-form-field>
         </div>
         
-        <div class="flex justify-end mt-6">
-            <button mat-raised-button type="submit" class="bg-red-700 rounded-lg hover:bg-red-900 text-white font-bold py-2 px-4 custom-button"
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <button mat-raised-button type="submit" class="custom-button boton-pulsar"
                 [disabled]="formulario.invalid"
                 [ngClass]="{'invalido-button': formulario.invalid}">
                 Guardar
             </button>
-            <button mat-button mat-dialog-close class="bg-red-700 rounded-lg hover:bg-red-900 text-white font-bold py-2 px-4 custom-button Cancelar">
+            <button mat-button mat-dialog-close class="custom-button Cancelar">
                 Cancelar
             </button>
         </div>

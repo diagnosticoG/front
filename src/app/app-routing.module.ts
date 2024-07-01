@@ -4,7 +4,7 @@ import { GeneroComponent } from './paginas/genero/genero.component';
 
 const routes: Routes = [
   {
-    path: 'paginas',
+    path: '',
     loadChildren: () => import('../app/paginas/paginas.module').then(m => m.PaginasModule)
   },
 

@@ -2,7 +2,7 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-button {
+.boton-pulsar {
     background-color: #ff8000;
     color: white !important;
     border: 1px solid #7f7f7f;
@@ -10,7 +10,7 @@ button {
     border-radius: 10px;
     margin: 10px;
 }
-button:hover{
+.boton-pulsar:hover{
     background-color: #966431;
 }
 
@@ -21,6 +21,11 @@ button:hover{
 
 .Cancelar {
     background-color: rgb(96, 87, 87) !important;
+    color: white !important;
+    border: 1px solid #7f7f7f;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px;
 }
   
 .Cancelar:hover {
