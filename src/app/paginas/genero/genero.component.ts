@@ -3,6 +3,8 @@ import { MetaDataColumna } from 'src/app/compartido/interfaces/metaDataColumna.i
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormComponent } from './form/form.component';
 import { ModalEliminarComponent } from 'src/app/compartido/modal-eliminar/modal-eliminar.component';
+import { GeneroService } from 'src/app/servicios/genero.service';
+import {Genero} from 'src/app/compartido/modelos/genero.model'
 
 @Component({
   selector: 'app-genero',
@@ -11,25 +13,16 @@ import { ModalEliminarComponent } from 'src/app/compartido/modal-eliminar/modal-
 })
 export class GeneroComponent {
   datos: any[] = [
-    { gen_nombre: 'Masculino', gen_descripcion: 'Persona de género masculino' },
-    { gen_nombre: 'Femenino', gen_descripcion: 'Persona de género femenino' },
-    {
-      gen_nombre: 'No binario',
-      gen_descripcion:
-        'Persona que no se identifica exclusivamente como masculina o femenina',
-    },
-    {
-      gen_nombre: 'Otro',
-      gen_descripcion: 'Persona con otro tipo de identidad de género',
-    },
   ];
 
   metaDataColumnas: MetaDataColumna[] = [
-    { campo: 'gen_nombre', titulo: 'GENERO' },
-    { campo: 'gen_descripcion', titulo: 'DESCRIPCION' },
+    { campo: 'nombre', titulo: 'GENERO' },
+    { campo: 'descripcion', titulo: 'DESCRIPCION' },
   ];
 
-  constructor(private ventanaDialogo: MatDialog) {}
+  constructor(private ventanaDialogo: MatDialog,private generoServicios:GeneroService) {
+    this.cargarGeneros()
+  }
 
   abrirFormulario(fila: any = null) {
     console.log(fila);
@@ -43,14 +36,37 @@ export class GeneroComponent {
       opciones
     );
     referencia.afterClosed().subscribe((form) => {
-      if (form.gen_id) {
+
+      const genero: Genero = {
+        Id:form.id ? form.id : 0,
+        Nombre: form.nombre,         
+        Descripcion: form.descripcion
+      };
+
+      if (form.id) {
+        this.generoServicios.actualizarGenero(form.id,form).subscribe(
+          (datos) =>{
+            this.cargarGeneros()
+          },
+          (error)=>{
+            console.log(error)
+          }
+        );
       } else {
+        
+        this.generoServicios.crearGenero(genero).subscribe(
+          (datos) => {
+            this.cargarGeneros()
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
       }
     });
   }
 
   eliminarRegistro(fila: any = null) {
-    console.log(fila);
     const opciones = {
       panelClass: 'panel-container',
       disableClose: true,
@@ -60,8 +76,27 @@ export class GeneroComponent {
       this.ventanaDialogo.open(ModalEliminarComponent, opciones);
     referencia.afterClosed().subscribe((estado) => {
       if (estado == true) {
-        console.log('hola');
+        this.generoServicios.eliminarGenero(fila.id).subscribe(
+          (datos) => {
+            this.cargarGeneros()
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
       }
     });
   }
+
+  cargarGeneros(){
+    this.generoServicios.cargarGeneros().subscribe(
+      (datos) => {
+        this.datos = datos;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
 }

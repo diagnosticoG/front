@@ -43,7 +43,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTableModule,
     MatCardModule,
     MatToolbarModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ]
 })
 export class CompartidoModule { }

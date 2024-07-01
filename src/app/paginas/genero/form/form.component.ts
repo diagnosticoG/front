@@ -26,9 +26,9 @@ export class FormComponent {
 
   cargarFormulario() {
     this.formulario = new FormGroup({
-      gen_id: new FormControl(this.datos?.gen_id),
-      gen_nombre: new FormControl(this.datos ? this.datos.gen_nombre : '', Validators.required),
-      gen_descripcion: new FormControl(this.datos ? this.datos.gen_descripcion : ''),
+      id: new FormControl(this.datos?.id),
+      nombre: new FormControl(this.datos ? this.datos.nombre : '', Validators.required),
+      descripcion: new FormControl(this.datos ? this.datos.descripcion : ''),
     });
   }
   grabar(){
