@@ -6,6 +6,7 @@ import { ModalEliminarComponent } from 'src/app/compartido/modal-eliminar/modal-
 import { PersonaService } from 'src/app/servicios/persona.service';
 import { Persona } from 'src/app/compartido/modelos/persona.model';
 import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-persona',
@@ -26,7 +27,7 @@ export class PersonaComponent {
     { campo: 'estado_Civil', titulo: 'ESTADO CIVIL' },
   ];
 
-  constructor(private ventanaDialogo: MatDialog, private personaServicio: PersonaService,private toastr: ToastrService) {
+  constructor(private ventanaDialogo: MatDialog, private personaServicio: PersonaService,private toastr: ToastrService,private castFecha: DatePipe) {
     this.cargarPersonas();
     this.changePage(0);
   }
@@ -90,12 +91,15 @@ export class PersonaComponent {
   cargarPersonas() {
     this.personaServicio.cargarPersonas().subscribe(
       (datos) => {
-        this.datosTotales = datos;
+        this.datosTotales = datos.map((persona:any) => ({
+          ...persona,
+          fecha_Nacimiento: this.castFecha.transform(persona.fecha_Nacimiento,'yyyy-MM-dd')
+        }));
         this.totalRecords = this.datosTotales.length;
         this.changePage(0);
       },
       (error) => {
-        this.mensajeError()
+        this.mensajeError();
       }
     );
   }
